@@ -10,7 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-/**
+/** 
  *
  * @author Pedro Medeiros <phsm at aluno.ifnmg.edu.br>
  */
