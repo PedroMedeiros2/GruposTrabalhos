@@ -2,14 +2,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package io.github.pedromedeiros2.grupostrabalho.atuacao;
+package io.github.pedromedeiros2.grupostrabalhos.atuacao;
 
+import io.github.pedromedeiros2.grupostrabalhos.grupo.Grupo;
+import io.github.pedromedeiros2.grupostrabalhos.pessoa.Pessoa;
 import java.io.Serializable;
 import java.time.LocalDate;
+import javax.json.bind.annotation.JsonbTransient;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -26,11 +33,28 @@ public class Atuacao implements Serializable {
     private LocalDate inicio;
     private LocalDate termino;
     
-     public Atuacao() {}
+    
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "lider_id")
+    @JsonbTransient
+            private Pessoa lider;
+    
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "grupo_id")
+    @JsonbTransient
+            private Grupo grupo;
+    
+    public Atuacao() {}
 
-    public Atuacao(LocalDate inicio, LocalDate termino) {
+    public Atuacao(LocalDate inicio, Grupo grupo) {
+        this.inicio = inicio;
+        this.grupo = grupo;
+    }
+    
+    public Atuacao(LocalDate inicio, LocalDate termino, Grupo grupo) {
         this.inicio = inicio;
         this.termino = termino;
+        this.grupo = grupo;
     }
 
     public Long getId() {
@@ -43,7 +67,7 @@ public class Atuacao implements Serializable {
 
     @Override
     public String toString() {
-        return "io.github.pedromedeiros2.grupostrabalhos.atuacao.Atuacao[ id=" + id + " ]";
+        return "io.github.pedromedeiros2.grupostrabalhos.atuacao.Atuacao[ id=" + getId() + " ]";
     }
 
     /**
@@ -72,6 +96,34 @@ public class Atuacao implements Serializable {
      */
     public void setTermino(LocalDate termino) {
         this.termino = termino;
+    }
+
+    /**
+     * @return the lider
+     */
+    public Pessoa getLider() {
+        return lider;
+    }
+
+    /**
+     * @param lider the lider to set
+     */
+    public void setLider(Pessoa lider) {
+        this.lider = lider;
+    }
+
+    /**
+     * @return the grupo
+     */
+    public Grupo getGrupo() {
+        return grupo;
+    }
+
+    /**
+     * @param grupo the grupo to set
+     */
+    public void setGrupo(Grupo grupo) {
+        this.grupo = grupo;
     }
     
 }

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package io.github.pedromedeiros2.grupostrabalho.endereco;
+package io.github.pedromedeiros2.grupostrabalhos.endereco;
 
 import java.io.Serializable;
 import javax.persistence.Column;
@@ -34,7 +34,7 @@ public class Endereco implements Serializable {
     
     public Endereco(){}
     
-    public Endereco(TipoLogradouro tipoLogradouro, String logradouro, String bairro, Integer numero){
+    public Endereco(TipoLogradouro tipoLogradouro, String logradouro, Integer numero, String bairro){
         this.tipoLogradouro = tipoLogradouro;
         this.logradouro = logradouro;
         this.numero = numero;
